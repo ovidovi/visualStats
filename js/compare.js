@@ -1,20 +1,22 @@
 
 $.ajax({
-  url: "https://spreadsheets.google.com/feeds/list/1h8HSu-XcJaIzzuj_QIxFsewDE4-T5vmsIKtfOAahZtw/od6/public/values?alt=json"
+  url: "https://spreadsheets.google.com/feeds/list/1h8HSu-XcJaIzzuj_QIxFsewDE4-T5vmsIKtfOAahZtw/otppaki/public/values?alt=json"
  // context: document.body
 }).done(function(data) {
  	var jsonData = data.feed.entry;
-
 	for(var i in jsonData){
-		var batterName = jsonData[i].gsx$player.$t;
+		var batPitcher = jsonData[i].gsx$pitcher.$t;
+		var batterName = jsonData[i].gsx$batter.$t;
 		var batterAb = jsonData[i].gsx$ab.$t;
 		var batterH = jsonData[i].gsx$hr.$t;
-		var batterBa = jsonData[i].gsx$avg.$t;
+		var batterBa = jsonData[i].gsx$ba.$t;
 		var batterObp = jsonData[i].gsx$obp.$t;
 		var batterSlg = jsonData[i].gsx$slg.$t;
 
 		//generate graph
-		genGraph(i,batterBa,batterSlg,batterObp,batterName, batterAb, batterH);
+		if (batPitcher==='Phil Hughes'){
+			genGraph(i,batterBa,batterSlg,batterObp,batterName, batterAb, batterH);
+		}
 	}
 
 });
@@ -24,8 +26,6 @@ var w = 200,
 
 //Data
 //Iterate through values
-
-
 function genGraph(chartNum, ba, slg, obp, name, ab, hits){
 	var d = [
 			  [
