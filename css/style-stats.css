@@ -224,3 +224,20 @@
 
 }
 
+
+
+
+/*Chart Classes*/
+.graph-title {
+	line-height: 12px;
+	color: #f05a28;
+	font-weight: bold;
+}
+svg {
+	font-family: 'melbournereg', Helvetica, Roboto, Arial, sans-serif;
+	font-size: 18px;
+	text-transform: uppercase;
+}
+	
+
+

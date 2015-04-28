@@ -22,8 +22,8 @@ angular.module('app')
                 {axis:"OBP",value:scope.batterItem.gsx$obp.$t}
             ]
         ];
-        var w = 200;
-        var h = 200;
+        var w = 160;
+        var h = 160;
         var mycfg = {
             w: w,
             h: h,
@@ -42,62 +42,28 @@ angular.module('app')
             .attr("height", h)
 
         var text = svg.append("text")
-            .attr("class", "title")
+            .attr("class", "graph-title")
             .attr('transform', 'translate(90,0)') 
             .attr("x", -50)
             .attr("y", 20)
-            .attr("font-size", "18px")
-            .attr("font-weight", "bold")
             .attr("fill", "#ee542a")
             .text(scope.batterItem.gsx$batter.$t);
 
         var text = svg.append("text")
-            .attr("class", "title")
+            .attr("class", "ab")
             .attr('transform', 'translate(90,0)') 
             .attr("x", -50)
             .attr("y", 40)
-            .attr("font-size", "18px")
-            .attr("fill", "#f59220")
+            .attr("fill", "#f7931d")
             .text("AB " + scope.batterItem.gsx$ab.$t);
+
+        var text = svg.append("text")
+            .attr("class", "black")
+            .attr('transform', 'translate(0,0)') 
+            .attr("x", -50)
+            .attr("y", 170)
+            .text("H");
 
   }};
 
 });
-
-
-
-
-
-
-
-    //Options for the Radar chart, other than default
-
-/*
-    $('#body').append('<div id="chart' + chartNum + '"" class="chart"></div>');
-
-
-    var svg = d3.select("#chart" + chartNum)
-        .selectAll('svg')
-        .append('svg')
-        .attr("width", w+300)
-        .attr("height", h)
-
-    var text = svg.append("text")
-        .attr("class", "title")
-        .attr('transform', 'translate(90,0)') 
-        .attr("x", -50)
-        .attr("y", 20)
-        .attr("font-size", "18px")
-        .attr("font-weight", "bold")
-        .attr("fill", "#ee542a")
-        .text(name);
-
-    var text = svg.append("text")
-        .attr("class", "title")
-        .attr('transform', 'translate(90,0)') 
-        .attr("x", -50)
-        .attr("y", 40)
-        .attr("font-size", "18px")
-        .attr("fill", "#f59220")
-        .text("AB " + ab);
-        */

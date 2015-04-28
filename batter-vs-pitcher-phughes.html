@@ -4,15 +4,20 @@
 
 <head>
 	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Tiger Batters Vs. Kyle Gibson</title>
+	<meta name="viewport" content="width=device-width">
+	<title>Tiger Batters Vs. Kyle Gibson</title>
 
-  
- <link rel="stylesheet" href="js/vendor/foundation/css/foundation.css">
-  <link rel="stylesheet" href="css/style-stats.css">
-  
 
-  <script src="js/vendor/foundation/js/vendor/modernizr.js"></script>
+	<link rel="stylesheet" href="js/vendor/foundation/css/foundation.css">
+	<link rel="stylesheet" href="css/style-stats.css">
+
+
+	<script src="js/vendor/foundation/js/vendor/modernizr.js"></script>
+	<script src="js/vendor/angular/angular.js"></script>
+	<script src="js/vendor/d3/d3.min.js"></script>
+	<script src="js/RadarChart.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/main.ctrl.js"></script>
 
 </head>
 <body>
@@ -33,6 +38,14 @@
 			<p>The stats below represent how the Detroit Tigers' starting lineup has historically performed against Phil Hughes. The intent of the visualizations is to show, at-a glance, how well a batter has done in the categories of overall hits per at bat (BA), getting on base (OBP), and hitting for power (SLG). All data comes from <a href="http://www.baseball-reference.com/">baseball-reference.com</a></p>
 		</div>
 	</div>
+
+
+     <ul class="list-group">
+        <li class="list-group-item" ng-repeat="batterItem in batterList" ng-if="batterItem.gsx$pitcher.$t==='Phil Hughes'">
+			<radar-chart batter-data="batterItem" id="chart{{$index}}" class="chart"></radar-chart>
+		</li>
+    </ul>
+
 
  <div class="player">
  	<h2 class="name">Anthony Gose</h2>

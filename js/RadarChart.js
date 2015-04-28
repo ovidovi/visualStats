@@ -35,11 +35,11 @@ var RadarChart = {
 	var Format = d3.format('.2g');
 	d3.select(id).select("svg").remove();
 	var g = d3.select(id)
-			.append("svg")
-			.attr("width", cfg.w+cfg.ExtraWidthX)
-			.attr("height", cfg.h+cfg.ExtraWidthY)
-			.append("g")
-			.attr("transform", "translate(" + cfg.TranslateX + "," + cfg.TranslateY + ")");
+		.append("svg")
+		.attr("width", cfg.w+cfg.ExtraWidthX)
+		.attr("height", cfg.h+cfg.ExtraWidthY)
+		.append("g")
+		.attr("transform", "translate(" + cfg.TranslateX + "," + cfg.TranslateY + ")");
 
 	var tooltip;
 	
@@ -50,9 +50,9 @@ var RadarChart = {
 		.data(allAxis)
 		.enter()
 		.append("circle")
-		.attr("cx", 100)
-		.attr("cy",100)
-		.attr("r", 85)
+		.attr("cx", 80)
+		.attr("cy",80)
+		.attr("r", 80)
 	   .attr("class", "circle")
 	   .attr("fill", "white")
 	   .style("stroke", "grey")
@@ -71,7 +71,7 @@ var RadarChart = {
 	   .attr("x", function(d){return levelFactor*(1-cfg.factor*Math.sin(0));})
 	   .attr("y", function(d){return levelFactor*(1-cfg.factor*Math.cos(0));})
 	   .attr("class", "legend")
-	   .style("font-family", "sans-serif")
+	   //.style("font-family", "sans-serif")
 	   .style("font-size", "10px")
 	   .attr("transform", "translate(" + (cfg.w/2-levelFactor + cfg.ToRight) + ", " + (cfg.h/2-levelFactor) + ")")
 	   .attr("fill", "#737373")
@@ -98,7 +98,7 @@ var RadarChart = {
 	axis.append("text")
 		.attr("class", "legend")
 		.text(function(d){return d})
-		.style("font-family", "sans-serif")
+		//.style("font-family", "sans-serif")
 		.style("font-size", "11px")
 		.attr("text-anchor", "middle")
 		.attr("dy", "1.5em")
@@ -150,14 +150,14 @@ var RadarChart = {
 					 });
 
 	  series++;
-	 // console.log(series)
+
 	});
 	series=0;
 
 	//Tooltip
 	tooltip = g.append('text')
 			   .style('opacity', 0)
-			   .style('font-family', 'sans-serif')
+			  // .style('font-family', 'sans-serif')
 			   .style('font-size', '13px');
   }
 };
