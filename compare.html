@@ -9,34 +9,15 @@
 	<script src="js/app.js"></script>
 	<script src="js/main.ctrl.js"></script>
 	<link rel="stylesheet" href="css/style-stats.css">
-	<style>
-		body {
-		  margin: 0;
-		  font-size: 14px;
-		  font-family: "Helvetica Neue", Helvetica;
 
-		}
-
-		.chart {
-			float:left;
-			width: 200px;
-			margin-left: 100px;
-			color: #ee542a;
-		}
-		.list-group li {
-			list-style-type: none;
-			margin: 0px;
-			padding: 0px;
-		}
-
-	</style>
   </head>
   <body ng-controller="MainController as main">
 
-     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="batterItem in batterList" ng-if="batterItem.gsx$pitcher.$t==='Phil Hughes'">
-			<radar-chart batter-data="batterItem" id="chart{{$index}}" class="chart"></radar-chart>
-        	
+
+
+     <ul class="batter-list">
+        <li class="batter" ng-repeat="batterItem in batterList" ng-if="batterItem.gsx$pitcher.$t==='Phil Hughes'">
+			<radar-chart batter-data="batterItem" id="chart{{$index}}" class="batter-radarchart"></radar-chart>
 		</li>
     </ul>
   

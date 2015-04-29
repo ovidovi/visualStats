@@ -8,16 +8,16 @@ var RadarChart = {
 	 w: 300,
 	 h: 300,
 	 factor: 1,
-	 factorLegend: .85,
+	 factorLegend: .50,
 	 levels: 3,
 	 maxValue: 0,
 	 radians: 2 * Math.PI,
 	 opacityArea: 0.8,
 	 ToRight: 5,
-	 TranslateX: 80,
+	 TranslateX: 30,
 	 TranslateY: 70,
-	 ExtraWidthX: 100,
-	 ExtraWidthY: 100,
+	 ExtraWidthX: 30,
+	 ExtraWidthY: 190,
 	 color: d3.rgb('#f59321')//d3.scale.category20()
 	};
 	
@@ -43,8 +43,7 @@ var RadarChart = {
 
 	var tooltip;
 	
-	//Circular segments
-	//for(var j=0; j<cfg.levels-1; j++){
+	//Outside cirlce
 	  var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
 	  g.selectAll(".levels")
 		.data(allAxis)
@@ -54,14 +53,13 @@ var RadarChart = {
 		.attr("cy",80)
 		.attr("r", 80)
 	   .attr("class", "circle")
-	   .attr("fill", "white")
+	   .attr("fill", "none")
 	   .style("stroke", "grey")
 	   .style("stroke-opacity", "0.85")
 	   .style("stroke-width", "0.3px")
-	   //.attr("transform", "translate(" + (cfg.w/2-levelFactor) + ", " + (cfg.h/2-levelFactor) + ")");
-	//}
 
-	//Text indicating at what % each level is
+
+	//Text indicating at what number each level is
 	for(var j=0; j<cfg.levels; j++){
 	  var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
 	  g.selectAll(".levels")
@@ -71,8 +69,6 @@ var RadarChart = {
 	   .attr("x", function(d){return levelFactor*(1-cfg.factor*Math.sin(0));})
 	   .attr("y", function(d){return levelFactor*(1-cfg.factor*Math.cos(0));})
 	   .attr("class", "legend")
-	   //.style("font-family", "sans-serif")
-	   .style("font-size", "10px")
 	   .attr("transform", "translate(" + (cfg.w/2-levelFactor + cfg.ToRight) + ", " + (cfg.h/2-levelFactor) + ")")
 	   .attr("fill", "#737373")
 	   .text(Format((j+1)*cfg.maxValue/cfg.levels));
@@ -96,10 +92,8 @@ var RadarChart = {
 		.style("stroke-width", "1px");
 
 	axis.append("text")
-		.attr("class", "legend")
+		.attr("class", "axis-label")
 		.text(function(d){return d})
-		//.style("font-family", "sans-serif")
-		.style("font-size", "11px")
 		.attr("text-anchor", "middle")
 		.attr("dy", "1.5em")
 		.attr("transform", function(d, i){return "translate(0, -10)"})
@@ -122,7 +116,7 @@ var RadarChart = {
 					 .data([dataValues])
 					 .enter()
 					 .append("polygon")
-					 .attr("class", "radar-chart-serie"+series)
+					 .attr("class", "radar-chart-series"+series)
 					 .style("stroke-width", "1px")
 					 .style("stroke", cfg.color)
 					 .attr("points",function(d) {
@@ -134,30 +128,11 @@ var RadarChart = {
 					  })
 					 .style("fill", function(j, i){return cfg.color})
 					 .style("fill-opacity", cfg.opacityArea)
-					 .on('mouseover', function (d){
-										z = "polygon."+d3.select(this).attr("class");
-										g.selectAll("polygon")
-										 .transition(200)
-										 .style("fill-opacity", 0.1); 
-										g.selectAll(z)
-										 .transition(200)
-										 .style("fill-opacity", .7);
-									  })
-					 .on('mouseout', function(){
-										g.selectAll("polygon")
-										 .transition(200)
-										 .style("fill-opacity", cfg.opacityArea);
-					 });
 
 	  series++;
 
 	});
 	series=0;
 
-	//Tooltip
-	tooltip = g.append('text')
-			   .style('opacity', 0)
-			  // .style('font-family', 'sans-serif')
-			   .style('font-size', '13px');
   }
 };
