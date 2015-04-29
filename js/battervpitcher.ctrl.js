@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller("MainController", function($scope, $http){
+.controller("BattervPitcher", function($scope, $http){
 
     $http.get('https://spreadsheets.google.com/feeds/list/1h8HSu-XcJaIzzuj_QIxFsewDE4-T5vmsIKtfOAahZtw/otppaki/public/values?alt=json').
     success(function(data, status, headers, config) {
