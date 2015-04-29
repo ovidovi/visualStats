@@ -49,9 +49,9 @@ var RadarChart = {
 		.data(allAxis)
 		.enter()
 		.append("circle")
-		.attr("cx", 80)
-		.attr("cy",80)
-		.attr("r", 80)
+		.attr("cx", 79)
+		.attr("cy",79)
+		.attr("r", 79)
 	   .attr("class", "circle")
 	   .attr("fill", "none")
 	   .style("stroke", "grey")
@@ -71,7 +71,7 @@ var RadarChart = {
 	   .attr("class", "legend")
 	   .attr("transform", "translate(" + (cfg.w/2-levelFactor + cfg.ToRight) + ", " + (cfg.h/2-levelFactor) + ")")
 	   .attr("fill", "#737373")
-	   .text(Format((j+1)*cfg.maxValue/cfg.levels));
+	   .text(((j+1)*cfg.maxValue/cfg.levels).toFixed(1));
 	}
 	
 	series = 0;
@@ -92,7 +92,7 @@ var RadarChart = {
 		.style("stroke-width", "1px");
 
 	axis.append("text")
-		.attr("class", "axis-label")
+		.attr("class", "label")
 		.text(function(d){return d})
 		.attr("text-anchor", "middle")
 		.attr("dy", "1.5em")

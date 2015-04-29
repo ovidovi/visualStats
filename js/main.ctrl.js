@@ -40,7 +40,7 @@ angular.module('app')
             h: h,
             maxValue: 1.2,
             levels: 6,
-            ExtraWidthX: 100
+            ExtraWidthX: 80
         }
 
         var chartElement = element[0];
@@ -55,7 +55,7 @@ angular.module('app')
         svg.append("text")
         .attr("class", "title")
         .attr('transform', 'translate(90,0)') 
-        .attr("x", -70)
+        .attr("x", -80)
         .attr("y", 20)
         .attr("fill", "#ee542a")
         .text(scope.batterItem.gsx$batter.$t);
@@ -63,16 +63,17 @@ angular.module('app')
         svg.append("text")
         .attr("class", "ab")
         .attr('transform', 'translate(90,0)') 
-        .attr("x", -70)
+        .attr("x", -80)
         .attr("y", 40)
         .attr("fill", "#f7931d")
         .text("AB " + scope.batterItem.gsx$ab.$t);
+
         var item;
         for (item = 0; item < seriesData.length; ++item) {
             svg.append("text")
             .attr("class", "seriesItem")
             .attr('transform', 'translate(140,0)') 
-            .attr("x", -85 + (item*40))
+            .attr("x", -95 + (item*40))
             .attr("y", 270)
             .attr("text-anchor", "middle")
             .text(seriesData[item].label);
@@ -80,7 +81,7 @@ angular.module('app')
             svg.append("text")
             .attr("class", "seriesItem")
             .attr('transform', 'translate(140,0)') 
-            .attr("x", -85 + (item*40))
+            .attr("x", -95 + (item*40))
             .attr("y", 300)
             .attr("fill", "#f7931d")
             .attr("text-anchor", "middle")
