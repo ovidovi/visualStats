@@ -1,1 +1,1 @@
-angular.module('app', ['angular.filter']);
+angular.module('app', ['angular.filter','ngCookies', 'ngResource']);

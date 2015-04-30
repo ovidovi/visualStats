@@ -1,14 +1,30 @@
 angular.module('app')
 
-.controller("BattervPitcher", function($scope, $http){
+.controller("BattervPitcher", function($scope, $http, $cookieStore){
+
 
     $http.get('https://spreadsheets.google.com/feeds/list/1h8HSu-XcJaIzzuj_QIxFsewDE4-T5vmsIKtfOAahZtw/otppaki/public/values?alt=json').
     success(function(data, status, headers, config) {
-       $scope.batterList = data.feed.entry;
+        $scope.batterList = data.feed.entry;
     }).
     error(function(data, status, headers, config) {
 
-    });
+    });  
+
+
+    var pitcherName = $cookieStore.get('pitcherName');
+    var teamName = $cookieStore.get('teamName');
+
+    $scope.pitcherName = pitcherName;
+    $scope.teamName = teamName;
+
+})
+
+.service('data', function($http) {
+
+    this.fetch = function(args) {
+   
+    }
 
 })
 
