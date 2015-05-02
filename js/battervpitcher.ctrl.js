@@ -1,31 +1,55 @@
 angular.module('app')
 
-.controller("BattervPitcher", function($scope, $http, $cookieStore){
+.controller("BattervPitcher", function($scope, $stateParams, playerData){
+    
+    var selectedPitcher = $stateParams.id;
+    
+    //Get list of players
+    var players = playerData.players;
+    
+    //Filter players by pitcher
+    var playersByPitcher = _.where(players, {pitcherName: selectedPitcher});
 
+    $scope.batterList = playersByPitcher;
 
-    $http.get('https://spreadsheets.google.com/feeds/list/1h8HSu-XcJaIzzuj_QIxFsewDE4-T5vmsIKtfOAahZtw/otppaki/public/values?alt=json').
-    success(function(data, status, headers, config) {
-        $scope.batterList = data.feed.entry;
-    }).
-    error(function(data, status, headers, config) {
-
-    });  
-
-
-    var pitcherName = $cookieStore.get('pitcherName');
-    var teamName = $cookieStore.get('teamName');
-
-    $scope.pitcherName = pitcherName;
-    $scope.teamName = teamName;
+    //Extract pitcher name and team name
+    $scope.selectedPitcherName = selectedPitcher;
+    var pitcherInfo = _.findWhere(players, {pitcherName: selectedPitcher});
+    $scope.teamName = pitcherInfo.teamName;
 
 })
 
-.service('data', function($http) {
-
-    this.fetch = function(args) {
-   
-    }
-
+.service('playerData', function($http) {
+    var playerData = this;
+    playerData.players = [];
+    	
+    playerData.fetch = function () {
+        var promise = $http.get('https://spreadsheets.google.com/feeds/list/1h8HSu-XcJaIzzuj_QIxFsewDE4-T5vmsIKtfOAahZtw/otppaki/public/values?alt=json').
+        success(function(data, status, headers, config) {
+            playerData.players = playerData.transform(data.feed.entry);
+        }).
+        error(function(data, status, headers, config) {
+    
+        });
+        return promise;
+    };
+    
+    playerData.transform = function(dataArray) {
+        var records = [];
+        dataArray.forEach(function(record) {
+            var player = {};
+            player.teamName = record.gsx$team.$t;
+            player.pitcherName = record.gsx$pitcher.$t;
+            player.batterName = record.gsx$batter.$t;
+            player.obp = record.gsx$obp.$t;
+            player.ba = record.gsx$ba.$t;
+            player.slg = record.gsx$slg.$t;
+            player.h = record.gsx$h.$t;
+            player.ab = record.gsx$ab.$t;
+            records.push(player);
+        }, this);
+        return records;
+    };
 })
 
 .directive('radarChart', function() {
@@ -35,17 +59,17 @@ angular.module('app')
 
         var data = [
             [
-                {axis:"BA",value:scope.batterItem.gsx$ba.$t},
-                {axis:"SLG",value:scope.batterItem.gsx$slg.$t},
-                {axis:"OBP",value:scope.batterItem.gsx$obp.$t}
+                {axis:"BA",value:scope.batterItem.ba},
+                {axis:"SLG",value:scope.batterItem.slg},
+                {axis:"OBP",value:scope.batterItem.obp}
             ]
         ];
 
         var seriesData = [
-            {label:"H",value:scope.batterItem.gsx$obp.$t},
-            {label:"BA",value:scope.batterItem.gsx$ba.$t},
-            {label:"SLG",value:scope.batterItem.gsx$slg.$t},
-            {label:"OBP",value:scope.batterItem.gsx$h.$t}
+            {label:"H",value:scope.batterItem.obp},
+            {label:"BA",value:scope.batterItem.ba},
+            {label:"SLG",value:scope.batterItem.slg},
+            {label:"OBP",value:scope.batterItem.h}
             
         ];
 
@@ -74,7 +98,7 @@ angular.module('app')
         .attr("x", -80)
         .attr("y", 20)
         .attr("fill", "#ee542a")
-        .text(scope.batterItem.gsx$batter.$t);
+        .text(scope.batterItem.batterName);
 
         svg.append("text")
         .attr("class", "ab")
@@ -82,7 +106,7 @@ angular.module('app')
         .attr("x", -80)
         .attr("y", 40)
         .attr("fill", "#f7931d")
-        .text("AB " + scope.batterItem.gsx$ab.$t);
+        .text("AB " + scope.batterItem.ab);
 
         var item;
         for (item = 0; item < seriesData.length; ++item) {

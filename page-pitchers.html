@@ -1,0 +1,23 @@
+
+
+	<div class="pageHead">
+
+	<a href="team-selection.html" ui-sref="app.home"><div class="button"> < back to team selection</div></a>
+	</br>
+		<ul>
+		<li><h1 class="tigers">Tigers Lineup</h1></li>
+		<li><div class="vs">vs</div></li>
+		<li><h1 class="twins"><b>{{ teamName }} / {{ selectedPitcherName }}</h1><h2>R / 4.32 ERA / 214 G</h2></li>
+		</ul>
+	</div>
+
+	<div class="pageIntro">
+			<p>The stats below represent how the Detroit Tigers' starting lineup has historically performed against Phil Hughes. The intent of the visualizations is to show, at-a glance, how well a batter has done in the categories of overall hits per at bat (BA), getting on base (OBP), and hitting for power (SLG). All data comes from <a href="http://www.baseball-reference.com/">baseball-reference.com</a></p>
+		</div>
+	</div>
+
+     <ul class="batter-list">
+        <li class="batter" ng-repeat="batterItem in batterList">
+			<radar-chart batter-data="batterItem" id="chart{{$index}}" class="chart"></radar-chart>
+		</li>
+    </ul>

@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller("BattervPitcher", function($scope, $http){
+.controller("BattervPitcherHome", function($scope, $http){
 
     $http.get('https://spreadsheets.google.com/feeds/list/1h8HSu-XcJaIzzuj_QIxFsewDE4-T5vmsIKtfOAahZtw/o4qj58j/public/values?alt=json').
     success(function(data, status, headers, config) {
@@ -16,8 +16,6 @@ angular.module('app')
   return { 
     restrict: 'E', 
     link: function(scope, element) {
-
-        console.log("SHIT!")
   }};
 
 });

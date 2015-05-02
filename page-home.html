@@ -1,0 +1,22 @@
+    <div class="pageHead">
+    </br>
+        <ul>
+            <li><h1 class="tigers">Tigers Lineup</h1></li>
+            <li><div class="vs">vs</div></li>
+            <li><h1 class="twins"><b>ALC</h1></li>
+        </ul>
+    </div>
+
+    <div class="pageIntro">
+            <p>Use this tool and the visualizations contained within to explore how Detroit Tigers batters have performed against American League starting pitchers. The intent of the visualizations is to show, at-a glance, how well a batter has done in the categories of getting on base (OBP), hitting for power (SLG), and overall hits per at bat (BA).</p>
+            <h2 class="tigers">Start by choosing a team and pitcher below:</h2></br>
+        </div>
+    </div>
+
+
+    <div class="large-6 medium-6 columns" ng-repeat="(key, value) in teamList | groupBy: 'teamName'">
+        <div class="team">
+          <h1 class="sox">{{ key }}</h1>
+          <a ui-sref="app.pitchers({id: key})" ng-repeat="(key, value) in value | groupBy: 'pitcherName'" class="button">{{ key }}</a>
+        </div>
+    </div>
